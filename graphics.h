@@ -34,6 +34,7 @@ void derive_graphics_metrics_from_loaded_level() {
 void draw_menu() {
     draw_text(game_title);
     draw_text(game_subtitle);
+    draw_text(game_exit);
 }
 
 void draw_game_over() {
@@ -74,6 +75,7 @@ void draw_level() {
                 case PLAYER:
                 case COIN:
                 case EMERALD:
+                case ENEMY:
                 case EXIT:
                     draw_image(air_image, pos, cell_size);
                     break;
@@ -92,6 +94,9 @@ void draw_level() {
                 case EMERALD:
                     draw_sprite(emerald_sprite, pos, cell_size);
                 break;
+                case ENEMY:
+                    draw_sprite(enemy_sprite, pos, cell_size);
+                    break;
                 case EXIT:
                     draw_image(exit_image, pos, cell_size);
                     break;
@@ -173,6 +178,11 @@ void draw_victory_menu() {
 
     draw_text(victory_title);
     draw_text(victory_subtitle);
+}
+
+void Reset() {
+    player_score = 0;
+    load_level(-level_index);
 }
 
 #endif // GRAPHICS_H

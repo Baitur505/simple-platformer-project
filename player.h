@@ -51,6 +51,13 @@ void update_player() {
     }
     if (is_colliding(player_pos, LAVA)) {
         get_collider(player_pos, LAVA) = ' ';
+        PlaySound(lava_sound);
+        game_state = GAME_OVER_STATE;
+        player_score = 0;
+    }
+    if (is_colliding(player_pos, ENEMY)) {
+        get_collider(player_pos, ENEMY) = ' ';
+        PlaySound(death_sound);
         game_state = GAME_OVER_STATE;
         player_score = 0;
     }

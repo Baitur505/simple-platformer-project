@@ -20,6 +20,7 @@ void load_images() {
     air_image     = LoadTexture("data/images/air.png");
     exit_image    = LoadTexture("data/images/exit.png");
     lava_image = LoadTexture("data/images/lava.png");
+    enemy_sprite = load_sprite("data/images/enemy/enemy", ".png", 2, true, 18);
     emerald_sprite = load_sprite("data/images/emerald/emerald", ".png", 2, true, 18);
     coin_sprite   = load_sprite("data/images/coin/coin",     ".png", 3, true, 18);
     player_sprite = load_sprite("data/images/player/player", ".png", 3, true, 10);
@@ -30,6 +31,7 @@ void unload_images() {
     UnloadTexture(air_image);
     UnloadTexture(exit_image);
     UnloadTexture(lava_image);
+    unload_sprite(enemy_sprite);
     unload_sprite(emerald_sprite);
     unload_sprite(player_sprite);
     unload_sprite(coin_sprite);
@@ -114,13 +116,17 @@ void load_sounds() {
     coin_sound = LoadSound("data/sounds/coin.wav");
     exit_sound = LoadSound("data/sounds/exit.wav");
     emerald_sound = LoadSound("data/sounds/emerald.wav");
-    bg_sound = LoadSound("data/sounds/bg");
+    lava_sound = LoadSound("data/sounds/lava.wav");
+    death_sound = LoadSound("data/sounds/death.wav");
+    bg_sound = LoadSound("data/music/bg_music.mp3");
 }
 
 void unload_sounds() {
     UnloadSound(coin_sound);
     UnloadSound(exit_sound);
     UnloadSound(emerald_sound);
+    UnloadSound(lava_sound);
+    UnloadSound(death_sound);
     UnloadSound(bg_sound);
 }
 

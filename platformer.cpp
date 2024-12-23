@@ -9,6 +9,10 @@
 
 void update_game() {
     game_frame++;
+    if (IsKeyReleased(KEY_ESCAPE))
+    {
+        clickPermitted = true;
+    }
 
     switch (game_state) {
         case MENU_STATE:
@@ -16,6 +20,9 @@ void update_game() {
                 game_state = GAME_STATE;
                 load_level(0);
                 PlaySound(bg_sound);
+            }
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                close = true;
             }
                 break;
         case GAME_STATE:
@@ -36,8 +43,9 @@ void update_game() {
             update_player();
                 break;
         case PAUSE_STATE:
-            if (IsKeyDown(KEY_ESCAPE)) {
-                game_state = GAME_STATE;;
+            if (IsKeyPressed(KEY_ESCAPE) && clickPermitted) {
+                game_state = GAME_STATE;
+                clickPermitted = false;
             }
                 break;
         case VICTORY_STATE:
@@ -60,6 +68,8 @@ void draw_game() {
             ClearBackground(BLACK);
             draw_menu();
             player_score = 0;
+            PlaySound(bg_sound);
+            Reset();
             break;
         case GAME_STATE:
             ClearBackground(BLACK);
