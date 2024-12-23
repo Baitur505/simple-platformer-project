@@ -52,6 +52,7 @@ void update_player() {
     if (is_colliding(player_pos, LAVA)) {
         get_collider(player_pos, LAVA) = ' ';
         game_state = GAME_OVER_STATE;
+        player_score = 0;
     }
 }
 

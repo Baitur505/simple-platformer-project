@@ -16,8 +16,13 @@ const char COIN   = '*';
 const char EXIT   = 'E';
 const char EMERALD = '^';
 const char LAVA = '!';
+const char ENEMY = '$';
 
 /* Levels */
+
+/* Close */
+
+bool close = false;
 
 struct level {
     size_t rows = 0, columns = 0;
@@ -183,7 +188,7 @@ Text game_over_text = {
 };
 
 Text game_over_text2 = {
-    "Press Enter to Return to Title Screen",
+    "Press Enter to go back to menu",
     { 0.50f, 0.65f }
 };
 
@@ -229,6 +234,7 @@ sprite player_sprite;
 Sound coin_sound;
 Sound exit_sound;
 Sound emerald_sound;
+Sound bg_sound;
 
 /* Victory Menu Background */
 
@@ -268,6 +274,7 @@ game_state game_state = MENU_STATE;
 void draw_text(Text &text);
 void derive_graphics_metrics_from_loaded_level();
 void draw_menu();
+void draw_game_over();
 void draw_game_overlay();
 void draw_level();
 void draw_player();

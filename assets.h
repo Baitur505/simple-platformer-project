@@ -114,12 +114,14 @@ void load_sounds() {
     coin_sound = LoadSound("data/sounds/coin.wav");
     exit_sound = LoadSound("data/sounds/exit.wav");
     emerald_sound = LoadSound("data/sounds/emerald.wav");
+    bg_sound = LoadSound("data/sounds/bg");
 }
 
 void unload_sounds() {
     UnloadSound(coin_sound);
     UnloadSound(exit_sound);
     UnloadSound(emerald_sound);
+    UnloadSound(bg_sound);
 }
 
 #endif // IMAGES_H
