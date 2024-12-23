@@ -10,31 +10,66 @@
 void update_game() {
     game_frame++;
 
-    // TODO
-
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
-        move_player_horizontally(MOVEMENT_SPEED);
+    switch (game_state) {
+        case MENU_STATE:
+            if (IsKeyPressed(KEY_ENTER)) {
+                game_state = GAME_STATE;
+                load_level(0);
+            }
+                break;
+        case GAME_STATE:
+            if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+                move_player_horizontally(MOVEMENT_SPEED);
+            }
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            move_player_horizontally(-MOVEMENT_SPEED);
+        }
+        // Calculating collisions to decide whether the player is allowed to jump: don't want them to suction cup to the ceiling or jump midair
+        is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
+        if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
+            player_y_velocity = -JUMP_STRENGTH;
+        }
+        update_player();
+                break;
+        case PAUSE_STATE:
+            SetExitKey(KEY_ENTER); 
+            if (IsKeyDown(KEY_ENTER)) {
+                SetExitKey(0);
+                game_state = PAUSE_STATE;
+            }
+                break;
+        case VICTORY_STATE:
+            if (IsKeyPressed(KEY_ENTER)) {
+                game_state = MENU_STATE;
+            }
+                break;
+        case GAME_OVER_STATE:
+            if (IsKeyDown(KEY_P));
+                break;
     }
-
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
-        move_player_horizontally(-MOVEMENT_SPEED);
-    }
-
-    // Calculating collisions to decide whether the player is allowed to jump: don't want them to suction cup to the ceiling or jump midair
-    is_player_on_ground = is_colliding({player_pos.x, player_pos.y + 0.1f}, WALL);
-    if ((IsKeyDown(KEY_UP) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) && is_player_on_ground) {
-        player_y_velocity = -JUMP_STRENGTH;
-    }
-
-    update_player();
 }
 
 void draw_game() {
-    // TODO
-
-    ClearBackground(BLACK);
-    draw_level();
-    draw_game_overlay();
+    switch (game_state) {
+        case MENU_STATE:
+            ClearBackground(BLACK);
+            draw_menu();
+            break;
+        case GAME_STATE:
+            ClearBackground(BLACK);
+            draw_level();
+            draw_game_overlay();
+            break;
+        case PAUSE_STATE:
+            draw_pause_menu();
+            break;
+        case VICTORY_STATE:
+            draw_victory_menu();
+            break;
+        case GAME_OVER_STATE:
+            draw_game_over();
+            break;
+    }
 }
 
 int main() {
@@ -48,7 +83,6 @@ int main() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-
         update_game();
         draw_game();
 
