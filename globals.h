@@ -14,6 +14,8 @@ const char AIR    = ' ';
 const char PLAYER = '@';
 const char COIN   = '*';
 const char EXIT   = 'E';
+const char EMERALD = '^';
+const char LAVA = '!';
 
 /* Levels */
 
@@ -26,7 +28,7 @@ char LEVEL_1_DATA[] = {
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
     '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
     '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
-    '#', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', '#',
+    '#', ' ', ' ', ' ', ' ', '^', ' ', ' ', ' ', ' ', '#',
     '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#',
     '#', ' ', '@', ' ', ' ', ' ', ' ', ' ', 'E', ' ', '#',
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
@@ -58,7 +60,7 @@ char LEVEL_3_DATA[] = {
     '#', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', '#',
     '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
     '#', ' ', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#',
-    '#', ' ', '@', '#', ' ', '#', ' ', ' ', 'E', ' ', '#',
+    '#', ' ', '@', '#', '!', '#', ' ', ' ', 'E', ' ', '#',
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
 };
 
@@ -206,6 +208,7 @@ Text victory_subtitle = {
 Texture2D wall_image;
 Texture2D air_image;
 Texture2D exit_image;
+Texture2D lava_image;
 
 struct sprite {
     size_t frame_count    = 0;
@@ -217,6 +220,7 @@ struct sprite {
     Texture2D *frames = nullptr;
 };
 
+sprite emerald_sprite;
 sprite coin_sprite;
 sprite player_sprite;
 
@@ -224,6 +228,7 @@ sprite player_sprite;
 
 Sound coin_sound;
 Sound exit_sound;
+Sound emerald_sound;
 
 /* Victory Menu Background */
 

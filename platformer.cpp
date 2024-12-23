@@ -33,9 +33,8 @@ void update_game() {
                 break;
         case PAUSE_STATE:
             SetExitKey(KEY_ENTER); 
-            if (IsKeyDown(KEY_ENTER)) {
-                SetExitKey(0);
-                game_state = PAUSE_STATE;
+            if (IsKeyDown(KEY_ESCAPE)) {
+                game_state = GAME_STATE;;
             }
                 break;
         case VICTORY_STATE:
@@ -44,7 +43,9 @@ void update_game() {
             }
                 break;
         case GAME_OVER_STATE:
-            if (IsKeyDown(KEY_P));
+            if (IsKeyPressed(KEY_ENTER));
+                game_state = MENU_STATE;
+                load_level(0);
                 break;
     }
 }

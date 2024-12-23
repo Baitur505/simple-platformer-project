@@ -19,6 +19,8 @@ void load_images() {
     wall_image    = LoadTexture("data/images/wall.png");
     air_image     = LoadTexture("data/images/air.png");
     exit_image    = LoadTexture("data/images/exit.png");
+    lava_image = LoadTexture("data/images/lava.png");
+    emerald_sprite = load_sprite("data/images/emerald/emerald", ".png", 2, true, 18);
     coin_sprite   = load_sprite("data/images/coin/coin",     ".png", 3, true, 18);
     player_sprite = load_sprite("data/images/player/player", ".png", 3, true, 10);
 }
@@ -27,6 +29,8 @@ void unload_images() {
     UnloadTexture(wall_image);
     UnloadTexture(air_image);
     UnloadTexture(exit_image);
+    UnloadTexture(lava_image);
+    unload_sprite(emerald_sprite);
     unload_sprite(player_sprite);
     unload_sprite(coin_sprite);
 }
@@ -109,11 +113,13 @@ void load_sounds() {
 
     coin_sound = LoadSound("data/sounds/coin.wav");
     exit_sound = LoadSound("data/sounds/exit.wav");
+    emerald_sound = LoadSound("data/sounds/emerald.wav");
 }
 
 void unload_sounds() {
     UnloadSound(coin_sound);
     UnloadSound(exit_sound);
+    UnloadSound(emerald_sound);
 }
 
 #endif // IMAGES_H
